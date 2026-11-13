@@ -33,7 +33,8 @@
 
 <link rel="preload" href="assets/fonts/barlow-condensed-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/dm-sans-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" as="image" href="assets/img/hero-2000.webp" imagesrcset="assets/img/hero-m.webp 800w, assets/img/hero-1200.webp 1200w, assets/img/hero-2000.webp 2000w" imagesizes="100vw" fetchpriority="high">
+<link rel="preload" as="image" href="assets/img/hero-m.webp" media="(max-width: 700px) and (orientation: portrait)" fetchpriority="high">
+<link rel="preload" as="image" href="assets/img/hero-2000.webp" imagesrcset="assets/img/hero-1200.webp 1200w, assets/img/hero-2000.webp 2000w" imagesizes="100vw" media="not all and (max-width: 700px) and (orientation: portrait)" fetchpriority="high">
 <link rel="stylesheet" href="css/main.css">
 <script>(function(d){d.classList.add('js');try{if(sessionStorage.getItem('hub-loaded'))d.classList.add('no-loader')}catch(e){}})(document.documentElement)</script>
 
@@ -89,7 +90,7 @@
         {"@type": "Question", "name": "Como funciona a experiência no shopping?", "acceptedAnswer": {"@type": "Answer", "text": "Você pode agendar pelo WhatsApp ou chegar e ser atendido por ordem de chegada. Nossa equipe ajusta os óculos, ensina os comandos e acompanha toda a sessão."}},
         {"@type": "Question", "name": "Qualquer idade pode jogar?", "acceptedAnswer": {"@type": "Answer", "text": "A experiência é liberada para crianças a partir de 8 anos. Menores de 15 anos jogam acompanhados de um responsável."}},
         {"@type": "Question", "name": "Preciso ter experiência com videogame ou realidade virtual?", "acceptedAnswer": {"@type": "Answer", "text": "Não. Os comandos são intuitivos e a equipe explica tudo antes de começar."}},
-        {"@type": "Question", "name": "A The Hub leva realidade virtual para eventos?", "acceptedAnswer": {"@type": "Answer", "text": "Sim. Levamos a arena para escolas, feiras, praças, aniversários e outros eventos. Fale com a equipe pelo WhatsApp para montar a sua experiência."}},
+        {"@type": "Question", "name": "A The Hub leva realidade virtual para eventos?", "acceptedAnswer": {"@type": "Answer", "text": "Sim. Levamos a arena para aniversários, casamentos, formaturas, empresas, feiras e escolas, em três formatos: Combo Start (1 óculos), Combo Duo (2 óculos) e Combo Premium (4 óculos), com montagem, monitoria e higienização incluídas."}},
         {"@type": "Question", "name": "Quais óculos de realidade virtual vocês usam?", "acceptedAnswer": {"@type": "Answer", "text": "Trabalhamos com Meta Quest 3 e Meta Quest 3S, óculos sem fio com realidade mista e controles Touch Plus."}},
         {"@type": "Question", "name": "Quanto custa jogar?", "acceptedAnswer": {"@type": "Answer", "text": "Valores, pacotes e disponibilidade são informados pela equipe no WhatsApp (83) 99303-5168."}}
       ]
@@ -121,6 +122,7 @@
   <symbol id="i-clock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></g></symbol>
   <symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/></g></symbol>
   <symbol id="i-users" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5"/><circle cx="17" cy="9" r="2.4"/><path d="M16.2 14.1c2.2.1 3.8 1.6 4.3 4.4"/></g></symbol>
+  <symbol id="i-hs" viewBox="0 0 32 20"><g fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="3" width="28" height="14" rx="6"/><path d="M12 17c1.2-2.2 2.4-3 4-3s2.8.8 4 3"/></g><circle cx="9" cy="9" r="1.4" fill="currentColor"/><circle cx="23" cy="9" r="1.4" fill="currentColor"/></symbol>
   <symbol id="i-close" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></symbol>
 </svg>
 
@@ -671,11 +673,134 @@
   <div class="wrap">
     <header class="sec-head sec-head-split">
       <div>
-        <p class="eyebrow rv">Leve a The Hub</p>
-        <h2 id="events-title" class="h2 rv">A arena vai até o <span class="accent">seu evento.</span></h2>
+        <p class="eyebrow rv">Arena para eventos</p>
+        <h2 id="events-title" class="h2 rv">Levamos a arena até o <span class="accent">seu evento.</span></h2>
       </div>
-      <p class="rv sec-note">Escolas, feiras, praças, aniversários. Montamos as estações, levamos os óculos e a equipe, e o seu público vive algo que nunca viu.</p>
+      <p class="rv sec-note">Aniversários, casamentos, formaturas, empresas, feiras e escolas. A The Hub cuida da montagem, calibração, monitoria, higienização e condução das partidas, do início ao fim.</p>
     </header>
+
+    <form class="planner rv" id="planner" aria-labelledby="planner-title" novalidate>
+      <div class="planner-head">
+        <p class="planner-k">Planejamento rápido</p>
+        <h3 id="planner-title">Conte um pouco sobre o seu evento</h3>
+        <p>As escolhas abaixo vão junto na mensagem para a equipe, para a gente indicar o formato certo.</p>
+      </div>
+
+      <fieldset class="pl-field pl-type">
+        <legend><b>01</b>Tipo de evento</legend>
+        <div class="pl-options">
+          <label><input type="radio" name="tipo" value="Aniversário" checked><span>Aniversário</span></label>
+          <label><input type="radio" name="tipo" value="Casamento"><span>Casamento</span></label>
+          <label><input type="radio" name="tipo" value="Formatura"><span>Formatura</span></label>
+          <label><input type="radio" name="tipo" value="Evento corporativo"><span>Corporativo</span></label>
+          <label><input type="radio" name="tipo" value="Feira ou ativação"><span>Feira ou ativação</span></label>
+          <label><input type="radio" name="tipo" value="Confraternização"><span>Confraternização</span></label>
+          <label><input type="radio" name="tipo" value="Evento escolar"><span>Escola</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="pl-field pl-place">
+        <legend><b>02</b>Onde vai ser</legend>
+        <div class="pl-options">
+          <label><input type="radio" name="local" value="salão de festas" checked><span>Salão de festas</span></label>
+          <label><input type="radio" name="local" value="casa ou condomínio"><span>Casa ou condomínio</span></label>
+          <label><input type="radio" name="local" value="empresa"><span>Empresa</span></label>
+          <label><input type="radio" name="local" value="feira ou stand"><span>Feira ou stand</span></label>
+          <label><input type="radio" name="local" value="espaço aberto"><span>Espaço aberto</span></label>
+          <label><input type="radio" name="local" value="outro local"><span>Outro</span></label>
+        </div>
+      </fieldset>
+
+      <div class="pl-field pl-guests">
+        <label for="pl-range" class="pl-legend"><b>03</b>Convidados</label>
+        <p class="pl-readout" aria-hidden="true"><output id="pl-out" for="pl-range">80</output><span>pessoas, em média</span></p>
+        <input type="range" id="pl-range" name="convidados" min="20" max="500" step="10" value="80" aria-valuetext="cerca de 80 convidados">
+        <div class="pl-scale" aria-hidden="true"><span>20</span><span>100</span><span>200</span><span>300</span><span>400</span><span>500+</span></div>
+      </div>
+
+      <p class="pl-summary" aria-live="polite"><span>Seu evento</span><strong data-summary>Aniversário em salão de festas, cerca de 80 convidados</strong></p>
+    </form>
+
+    <div class="combos">
+      <article class="combo rv" style="--c:#ffd84a" aria-labelledby="combo-start">
+        <header>
+          <p class="combo-k">Combo</p>
+          <h3 id="combo-start">Start</h3>
+          <p class="combo-lead">Experiência individual, com fila rápida e alta imersão.</p>
+        </header>
+        <div class="combo-num">
+          <span class="n">01</span>
+          <span class="combo-units"><span class="hs-row" aria-hidden="true"><svg><use href="#i-hs"/></svg></span>óculos VR</span>
+        </div>
+        <ul class="combo-list">
+          <li>Jogos individuais de alto impacto visual e sensorial.</li>
+          <li>Fila ágil para eventos com grande circulação de pessoas.</li>
+          <li>Um monitor técnico acompanhando cada participante.</li>
+          <li>Higienização do equipamento a cada troca de jogador.</li>
+        </ul>
+        <dl class="combo-spec">
+          <div><dt>Formato</dt><dd>Experiências solo</dd></div>
+          <div><dt>Duração</dt><dd>2 ou 3 horas, com horas adicionais</dd></div>
+        </dl>
+        <a class="btn btn-ghost btn-block" data-combo="Combo Start" href="https://wa.me/5583993035168" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg><span>Consultar o Start</span></a>
+      </article>
+
+      <article class="combo combo-pick rv" style="--c:#fc5185" aria-labelledby="combo-duo">
+        <header>
+          <p class="combo-k">Combo <em>Mais escolhido</em></p>
+          <h3 id="combo-duo">Duo</h3>
+          <p class="combo-lead">Feito para interação, cooperação e disputa entre os convidados.</p>
+        </header>
+        <div class="combo-num">
+          <span class="n">02</span>
+          <span class="combo-units"><span class="hs-row" aria-hidden="true"><svg><use href="#i-hs"/></svg><svg><use href="#i-hs"/></svg></span>óculos sincronizados</span>
+        </div>
+        <ul class="combo-list">
+          <li>Dois jogadores conectados no mesmo universo virtual.</li>
+          <li>Catálogo com modos cooperativos e duelos diretos.</li>
+          <li>Um monitor especializado para guiar duplas e minitorneios.</li>
+          <li>Estrutura pensada para gerar interação entre os convidados.</li>
+        </ul>
+        <dl class="combo-spec">
+          <div><dt>Formato</dt><dd>Multiplayer em dupla</dd></div>
+          <div><dt>Duração</dt><dd>2 ou 3 horas, com horas adicionais</dd></div>
+        </dl>
+        <a class="btn btn-wa btn-block" data-combo="Combo Duo" href="https://wa.me/5583993035168" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg><span>Consultar o Duo</span></a>
+      </article>
+
+      <article class="combo rv" style="--c:#45b7ff" aria-labelledby="combo-premium">
+        <header>
+          <p class="combo-k">Combo</p>
+          <h3 id="combo-premium">Premium</h3>
+          <p class="combo-lead">A experiência de grupo para eventos de alto impacto.</p>
+        </header>
+        <div class="combo-num">
+          <span class="n">04</span>
+          <span class="combo-units"><span class="hs-row" aria-hidden="true"><svg><use href="#i-hs"/></svg><svg><use href="#i-hs"/></svg><svg><use href="#i-hs"/></svg><svg><use href="#i-hs"/></svg></span>óculos em rede</span>
+        </div>
+        <ul class="combo-list">
+          <li>Quatro jogadores conectados ao mesmo tempo em multiplayer.</li>
+          <li>Missões em equipe, sobrevivência e competições de esquadrão.</li>
+          <li>Dois monitores especializados para manter o fluxo organizado.</li>
+          <li>Transforma a realidade virtual na atração central do evento.</li>
+        </ul>
+        <dl class="combo-spec">
+          <div><dt>Formato</dt><dd>Grupo de até 4 jogadores</dd></div>
+          <div><dt>Duração</dt><dd>2 ou 3 horas, com horas adicionais</dd></div>
+        </dl>
+        <a class="btn btn-ghost btn-block" data-combo="Combo Premium" href="https://wa.me/5583993035168" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg><span>Consultar o Premium</span></a>
+      </article>
+    </div>
+
+    <ul class="included rv" aria-label="Incluído em todos os combos">
+      <li><span>Em todos os combos</span></li>
+      <li>Óculos Meta Quest de última geração</li>
+      <li>Equipe especializada</li>
+      <li>Montagem, calibração e suporte</li>
+      <li>Diversão do início ao fim</li>
+    </ul>
+
+    <p class="eyebrow rv events-past">Onde já estivemos</p>
     <ol class="timeline">
       <li class="tl-item rv">
         <img src="assets/img/ev-escola.webp" width="760" height="950" loading="lazy" decoding="async" alt="Dois alunos do Colégio Novo Astral rindo com óculos de realidade virtual">
@@ -703,8 +828,8 @@
       </li>
     </ol>
     <div class="events-cta rv">
-      <p>Quer a The Hub no seu colégio, empresa ou festa?</p>
-      <a class="btn btn-wa btn-lg" data-wa="Olá! Quero levar a The Hub para o meu evento. Podemos conversar sobre data, local e público?" href="https://wa.me/5583993035168" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg><span>Contratar para evento</span></a>
+      <p>Transforme o seu evento em uma experiência <em>inesquecível.</em></p>
+      <a class="btn btn-wa btn-lg" data-plan href="https://wa.me/5583993035168" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg><span>Consultar datas e orçamento</span></a>
     </div>
   </div>
 </section>
@@ -765,7 +890,7 @@
       </details>
       <details class="rv">
         <summary>Vocês levam a realidade virtual para eventos?</summary>
-        <p>Sim. Levamos a arena para escolas, feiras, praças, aniversários e outros eventos. Chame no WhatsApp para montar a sua experiência.</p>
+        <p>Sim. Levamos a arena para aniversários, casamentos, formaturas, empresas, feiras e escolas, em três formatos: <a href="#eventos">Combo Start, Duo e Premium</a>, com 1, 2 ou 4 óculos. Montagem, monitoria e higienização estão incluídas.</p>
       </details>
       <details class="rv">
         <summary>Quais óculos vocês usam?</summary>

@@ -89,6 +89,7 @@
   // A abertura das lentes começa quando a tela de carregamento termina.
   (window.hubReady || Promise.resolve()).then(runIntro);
 
+  const initPage = () => {
   /* ---------- Header, barra de progresso e botão flutuante ---------- */
   const header = $('.site-header');
   const bar = $('.progress span');
@@ -336,6 +337,39 @@
     }
   }
 
+  /* ---------- Planejador de eventos + combos ---------- */
+  const planner = $('#planner');
+  if (planner) {
+    const range = $('#pl-range', planner);
+    const out = $('#pl-out', planner);
+    const summary = $('[data-summary]', planner);
+    const guestsText = (v) => (v >= 500 ? 'mais de 500 convidados' : `cerca de ${v} convidados`);
+    const read = () => {
+      const v = Number(range.value);
+      return { tipo: planner.elements.tipo.value, local: planner.elements.local.value, v, convidados: guestsText(v) };
+    };
+    const message = (combo) => {
+      const s = read();
+      let msg = 'Olá! Quero levar a The Hub para o meu evento.\n\n';
+      msg += `Tipo: ${s.tipo}\nLocal: ${s.local.charAt(0).toUpperCase() + s.local.slice(1)}\nConvidados: ${s.v >= 500 ? 'mais de 500' : 'cerca de ' + s.v}`;
+      if (combo) msg += `\nInteresse: ${combo}`;
+      return msg + '\n\nPodemos ver datas e orçamento?';
+    };
+    const update = () => {
+      const s = read();
+      out.textContent = s.v >= 500 ? '500+' : String(s.v);
+      range.setAttribute('aria-valuetext', s.convidados);
+      range.style.setProperty('--p', `${((s.v - range.min) / (range.max - range.min)) * 100}%`);
+      summary.textContent = `${s.tipo} em ${s.local}, ${s.convidados}`;
+      $$('[data-combo]').forEach((a) => { a.href = waLink(message(a.dataset.combo)); });
+      $$('[data-plan]').forEach((a) => { a.href = waLink(message()); });
+    };
+    planner.addEventListener('input', update);
+    planner.addEventListener('change', update);
+    planner.addEventListener('submit', (e) => e.preventDefault());
+    update();
+  }
+
   /* ---------- Formulário que monta a mensagem do WhatsApp ---------- */
   const form = $('#wa-form');
   if (form) {
@@ -360,4 +394,8 @@
     });
     name.addEventListener('input', () => { if (name.value.trim()) { err.hidden = true; name.removeAttribute('aria-invalid'); } });
   }
+  };
+  // As interações da página começam quando a tela de carregamento termina,
+  // em uma tarefa separada, para não competir com o minijogo.
+  (window.hubReady || Promise.resolve()).then(() => setTimeout(initPage, 0));
 })();
