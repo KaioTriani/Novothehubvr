@@ -9,11 +9,11 @@ O site é estático: não precisa de Node, banco de dados nem build no servidor.
 1. No hPanel, abra **Sites → thehubvr.com.br → Avançado → Git**.
 2. Faça **backup** do `public_html` atual, se houver algo nele, e esvazie a pasta (o deploy por Git exige a pasta de destino vazia).
 3. Em **Criar um novo repositório**:
-   - Repositório: `https://github.com/KaioTriani/thehubvr.git`
+   - Repositório: `https://github.com/KaioTriani/Novothehubvr.git`
    - Branch: `main`
    - Diretório: deixe **em branco** (instala direto no `public_html`)
 4. Clique em **Criar** e depois em **Implantar**.
-5. Se o repositório for **privado**, a Hostinger mostra uma **chave SSH**: adicione-a no GitHub em *Settings → Deploy keys* do repositório e use a URL `git@github.com:KaioTriani/thehubvr.git`.
+5. Se o repositório for **privado**, a Hostinger mostra uma **chave SSH**: adicione-a no GitHub em *Settings → Deploy keys* do repositório e use a URL `git@github.com:KaioTriani/Novothehubvr.git`.
 6. Opcional: ative a **Implantação automática** e cole o webhook em *Settings → Webhooks* do GitHub. A cada `git push` na `main` o site é atualizado sozinho.
 
 ## Opção 2: enviar o ZIP pelo Gerenciador de Arquivos
