@@ -11,10 +11,13 @@ RedirectMatch 404 /HOSTINGER\.md$
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
-  # HTTPS + www
-  RewriteCond %{HTTPS} off [OR]
-  RewriteCond %{HTTP_HOST} !^www\. [NC]
+  # Domínio oficial sem www vai para https://www (o endereço temporário da Hostinger não é afetado)
+  RewriteCond %{HTTP_HOST} ^thehubvr\.com\.br$ [NC]
   RewriteRule ^ https://www.thehubvr.com.br%{REQUEST_URI} [L,R=301]
+  # Qualquer endereço acessado por http passa para https, mantendo o mesmo domínio
+  RewriteCond %{HTTPS} off
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
   # Páginas do site antigo apontam para as seções novas
   RewriteRule ^agendar-experiencia/?$ /#contato [NE,L,R=301]
   RewriteRule ^entre-em-contato/?$ /#contato [NE,L,R=301]
